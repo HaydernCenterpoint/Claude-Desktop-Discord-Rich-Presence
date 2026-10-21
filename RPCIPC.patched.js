@@ -62,7 +62,7 @@ function recastNetSocket(socket) {
     };
 }
 
-// --- Auto Claude-3p Native 3-Line Mobile/Web Optimized + Full-Bleed 256x256 XL Clawd GIFs + Desktop Rich UI ---
+// --- Auto Claude-3p Native 3-Line Mobile/Web Optimized + Verified Working Animated Clawd GIFs + Desktop Rich UI ---
 let claudeRpcStarted = false;
 function startClaudeAutoClient(listeningPipePath) {
     if (claudeRpcStarted) return;
@@ -86,7 +86,6 @@ function startClaudeAutoClient(listeningPipePath) {
         } catch (e) {}
     }
 
-    // Tự động đồng bộ bộ GIF 256x256 XL tràn viền mới lên GitHub của bạn để Discord Mobile/Web tải trực tiếp
     let ghPublishRunning = false;
     function autoPublishToGitHub() {
         try {
@@ -94,7 +93,7 @@ function startClaudeAutoClient(listeningPipePath) {
             if (fs.existsSync(githubSyncFlagPath)) {
                 try {
                     const prev = JSON.parse(fs.readFileSync(githubSyncFlagPath, 'utf8'));
-                    if (prev && prev.xlGifsSynced) return;
+                    if (prev && prev.success) return;
                 } catch (e) {}
             }
             const pubScript = path.join(pluginDir, 'auto-github-publish.js');
@@ -181,9 +180,14 @@ function startClaudeAutoClient(listeningPipePath) {
                 document.head.appendChild(st);
             }
             st.textContent = `
-                img[src*="Claude-Desktop-Discord-Rich-Presence"],
+                img[src*="clawd-on-desk"],
+                img[src*="clawd-emotes-skill"] {
+                    transform: scale(1.42) translateY(-2%) !important;
+                    transform-origin: center bottom !important;
+                    image-rendering: pixelated !important;
+                }
                 img[src*="ClawdMoji"] {
-                    transform: scale(1.06) !important;
+                    transform: scale(1.08) !important;
                     transform-origin: center center !important;
                     image-rendering: pixelated !important;
                 }
@@ -559,21 +563,21 @@ function startClaudeAutoClient(listeningPipePath) {
         };
     }
 
-    // Bộ sưu tập 12 HOẠT CẢNH ĐỘNG 256x256 TRÀN VIỀN 100% KHUNG VUÔNG (Hiển thị TO, SẮC NÉT trên cả Điện Thoại, Web và Máy Người Khác mà KHÔNG cần CSS!)
-    const OWN_REPO_GIF_BASE = 'https://raw.githubusercontent.com/HaydernCenterpoint/Claude-Desktop-Discord-Rich-Presence/main/assets/gifs';
+    // Bộ sưu tập 13 HOẠT CẢNH ĐỘNG (Animated Scenes) ĐÃ XÁC MINH 100% TỒN TẠI TRÊN GITHUB CDN (Không bao giờ hiện dấu chấm hỏi [?])
     const CLAWD_SCENES = [
-        { name: 'Hardhat Builder 🔨', url: `${OWN_REPO_GIF_BASE}/clawd-builder-xl.gif` },
-        { name: 'Headphones Groove 🎧', url: `${OWN_REPO_GIF_BASE}/clawd-groove-xl.gif` },
-        { name: 'Fast Coding ⌨️', url: `${OWN_REPO_GIF_BASE}/clawd-coding-xl.gif` },
-        { name: 'Rocket Boost 🚀', url: `${OWN_REPO_GIF_BASE}/clawd-rocket-xl.gif` },
-        { name: 'Party Crown 👑', url: `${OWN_REPO_GIF_BASE}/clawd-party-xl.gif` },
-        { name: 'Juggling AI Orbs 🤹', url: `${OWN_REPO_GIF_BASE}/clawd-juggling-xl.gif` },
-        { name: 'Coffee Break ☕', url: `${OWN_REPO_GIF_BASE}/clawd-coffee-xl.gif` },
-        { name: 'Deep Thinking 💡', url: `${OWN_REPO_GIF_BASE}/clawd-thinking-xl.gif` },
-        { name: 'Dancing Mariachi 🪇', url: 'https://raw.githubusercontent.com/afspies/ClawdMoji/main/emoji/mariachi/clawd_mariachi.gif' },
+        { name: 'Building Blocks 🧱', url: 'https://raw.githubusercontent.com/rullerzhou-afk/clawd-on-desk/main/assets/gif/clawd-building.gif' },
         { name: 'Surfing Waves 🏄', url: 'https://raw.githubusercontent.com/afspies/ClawdMoji/main/emoji/surf/clawd_surf.gif' },
+        { name: 'Dancing Mariachi 🪇', url: 'https://raw.githubusercontent.com/afspies/ClawdMoji/main/emoji/mariachi/clawd_mariachi.gif' },
         { name: 'On Fire Coding 🔥', url: 'https://raw.githubusercontent.com/afspies/ClawdMoji/main/emoji/fire/clawd_fire.gif' },
-        { name: 'London Rain 🌧️', url: 'https://raw.githubusercontent.com/afspies/ClawdMoji/main/emoji/rain/clawd_rain.gif' }
+        { name: 'Headphones Groove 🎧', url: 'https://raw.githubusercontent.com/rullerzhou-afk/clawd-on-desk/main/assets/gif/clawd-headphones-groove.gif' },
+        { name: 'Juggling Tasks 🤹', url: 'https://raw.githubusercontent.com/rullerzhou-afk/clawd-on-desk/main/assets/gif/clawd-juggling.gif' },
+        { name: 'London Rain 🌧️', url: 'https://raw.githubusercontent.com/afspies/ClawdMoji/main/emoji/rain/clawd_rain.gif' },
+        { name: 'Fast Typing ⌨️', url: 'https://raw.githubusercontent.com/rullerzhou-afk/clawd-on-desk/main/assets/gif/clawd-typing.gif' },
+        { name: 'Rock Guitar 🎸', url: 'https://raw.githubusercontent.com/xixicc186/clawd-emotes-skill/main/clawd-emotes/gallery/clawd-guitar.gif' },
+        { name: 'Gaming Time 🎮', url: 'https://raw.githubusercontent.com/xixicc186/clawd-emotes-skill/main/clawd-emotes/gallery/clawd-gaming.gif' },
+        { name: 'Coffee Break ☕', url: 'https://raw.githubusercontent.com/xixicc186/clawd-emotes-skill/main/clawd-emotes/gallery/clawd-coffee.gif' },
+        { name: 'Deep Thinking 💡', url: 'https://raw.githubusercontent.com/rullerzhou-afk/clawd-on-desk/main/assets/gif/clawd-thinking.gif' },
+        { name: 'Happy Bounce 🦀', url: 'https://raw.githubusercontent.com/rullerzhou-afk/clawd-on-desk/main/assets/gif/clawd-idle.gif' }
     ];
 
     const MODEL_DISPLAY_MAP = {
@@ -1341,7 +1345,6 @@ function startClaudeAutoClient(listeningPipePath) {
         const live = detectLiveClaude3pState();
 
         ensureAllDiscordVersionsPatched();
-        autoPublishToGitHub();
 
         const addedStr = `+${formatNumber(live.linesAdded)}`;
         const removedStr = `-${formatNumber(live.linesRemoved)}`;
@@ -1375,11 +1378,6 @@ function startClaudeAutoClient(listeningPipePath) {
 
         injectCustomStylesAndColorizeDiff();
 
-        // TỐI ƯU HÓA HIỂN THỊ NATIVE 3 DÒNG TRÊN ĐIỆN THOẠI, TRÌNH DUYỆT WEB VÀ MÁY BẠN BÈ:
-        // - Dòng 1 (details): [Cowork] Working • Plugin Discord Rich Presence
-        // - Dòng 2 (state):   🪙 70.0M/3.7B • +20,150 -4 🟩🟩🟩🟩⬛  (Ngắn gọn ~32 ký tự để không bị cắt mất thanh 5 ô xanh trên màn hình hẹp của điện thoại!)
-        // - Dòng 3 (large_text - Discord tự động hiển thị thành dòng chữ thứ 3 trên Mobile/Web):
-        //   ✦ Gemini 4 Argon • >_ ••• Running a command...
         const details = `[${live.mode || 'Cowork'}] ${live.status || 'Working'} • ${live.activityName || 'Agentic Coding'}`.slice(0, 128);
         const state = `🪙 ${sessTokStr}/${totalTokStr} • ${addedStr} ${removedStr} ${diffBar.unicodeBar}`.slice(0, 128);
         const nativeLine3 = `✦ ${shortModel} • >_ ${displayThinking}`.slice(0, 128);
@@ -1398,16 +1396,6 @@ function startClaudeAutoClient(listeningPipePath) {
                 small_image: statusBadge.smallKey,
                 small_text: statusBadge.smallText.slice(0, 128)
             },
-            buttons: [
-                {
-                    label: `✦ ${shortModel}`.slice(0, 32),
-                    url: 'https://github.com/HaydernCenterpoint/Claude-Desktop-Discord-Rich-Presence'
-                },
-                {
-                    label: `🪙 ${sessTokStr} • Total: ${totalTokStr}`.slice(0, 32),
-                    url: 'https://claude.ai'
-                }
-            ],
             instance: false
         };
 
@@ -1418,7 +1406,7 @@ function startClaudeAutoClient(listeningPipePath) {
         };
         try {
             clientSocket.write(encode(1, frame));
-            writeLog(`Sent SET_ACTIVITY: ${details} | ${state} | L3=${nativeLine3}`);
+            writeLog(`Sent SET_ACTIVITY: ${details} | ${state} | gif=${currentScene.url}`);
         } catch (e) {
             writeLog(`Write error: ${e.message}`);
         }
@@ -1499,7 +1487,7 @@ function startClaudeAutoClient(listeningPipePath) {
         }, 4000);
     }, 2000);
 }
-// --- End Auto Claude-3p Native 3-Line Mobile/Web Optimized + Full-Bleed 256x256 XL Clawd GIFs + Desktop Rich UI ---
+// --- End Auto Claude-3p Native 3-Line Mobile/Web Optimized + Verified Working Animated Clawd GIFs + Desktop Rich UI ---
 
 function recastNetServer(server) {
     const emitter = createSafeEmitter();

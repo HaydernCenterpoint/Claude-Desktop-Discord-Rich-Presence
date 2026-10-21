@@ -1,8 +1,7 @@
 {
-  "time": "2026-10-21T16:54:08.369Z",
-  "success": true,
-  "method": "git-credential-manager-api",
-  "apiStatus": 201,
-  "pushOut": "branch 'main' set up to track 'origin/main'.\n",
-  "url": "https://github.com/HaydernCenterpoint/Claude-Desktop-Discord-Rich-Presence"
+  "time": "2026-10-21T17:08:52.804Z",
+  "success": false,
+  "error": "Command failed: gh repo create Claude-Desktop-Discord-Rich-Presence --public --description \"Live Discord Rich Presence for Claude Desktop & Claude Code with 13 animated Clawd scenes, inline SVG provider logos, terminal thinking box, token stats & GitHub diff bar\" --source=. --remote=origin --push\n'gh' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n",
+  "stderr": "'gh' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n",
+  "stdout": null
 }
