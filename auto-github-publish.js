@@ -111,6 +111,7 @@ async function runPublish() {
       );
       saveResult({
         success: true,
+        xlGifsSynced: true,
         method: 'git-credential-manager-api',
         apiStatus: apiRes ? apiRes.statusCode : null,
         pushOut,

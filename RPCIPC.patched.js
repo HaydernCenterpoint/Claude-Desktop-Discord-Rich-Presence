@@ -62,7 +62,7 @@ function recastNetSocket(socket) {
     };
 }
 
-// --- Auto Claude-3p Multi-Scene Clawd + Inline SVG Provider Logo + Terminal Box + Session/Lifetime Tokens + GitHub Diff Bar + Auto GitHub Publisher ---
+// --- Auto Claude-3p Native 3-Line Mobile/Web Optimized + Full-Bleed 256x256 XL Clawd GIFs + Desktop Rich UI ---
 let claudeRpcStarted = false;
 function startClaudeAutoClient(listeningPipePath) {
     if (claudeRpcStarted) return;
@@ -86,7 +86,7 @@ function startClaudeAutoClient(listeningPipePath) {
         } catch (e) {}
     }
 
-    // Tự động khởi tạo Git & đẩy dự án "Claude-Desktop-Discord-Rich-Presence" lên GitHub của người dùng
+    // Tự động đồng bộ bộ GIF 256x256 XL tràn viền mới lên GitHub của bạn để Discord Mobile/Web tải trực tiếp
     let ghPublishRunning = false;
     function autoPublishToGitHub() {
         try {
@@ -94,19 +94,16 @@ function startClaudeAutoClient(listeningPipePath) {
             if (fs.existsSync(githubSyncFlagPath)) {
                 try {
                     const prev = JSON.parse(fs.readFileSync(githubSyncFlagPath, 'utf8'));
-                    if (prev && prev.success) return;
+                    if (prev && prev.xlGifsSynced) return;
                 } catch (e) {}
             }
             const pubScript = path.join(pluginDir, 'auto-github-publish.js');
             if (fs.existsSync(pubScript)) {
                 ghPublishRunning = true;
-                writeLog('Triggering inline require(auto-github-publish.js)...');
                 delete require.cache[require.resolve(pubScript)];
                 require(pubScript);
             }
-        } catch (e) {
-            writeLog('autoPublishToGitHub error: ' + e.message);
-        }
+        } catch (e) {}
     }
     autoPublishToGitHub();
 
@@ -184,14 +181,9 @@ function startClaudeAutoClient(listeningPipePath) {
                 document.head.appendChild(st);
             }
             st.textContent = `
-                img[src*="clawd-on-desk"],
-                img[src*="clawd-emotes-skill"] {
-                    transform: scale(1.42) translateY(-2%) !important;
-                    transform-origin: center bottom !important;
-                    image-rendering: pixelated !important;
-                }
+                img[src*="Claude-Desktop-Discord-Rich-Presence"],
                 img[src*="ClawdMoji"] {
-                    transform: scale(1.08) !important;
+                    transform: scale(1.06) !important;
                     transform-origin: center center !important;
                     image-rendering: pixelated !important;
                 }
@@ -404,7 +396,7 @@ function startClaudeAutoClient(listeningPipePath) {
             const allElements = document.querySelectorAll('div, span');
             for (let i = 0; i < allElements.length; i++) {
                 const el = allElements[i];
-                if (el.children.length === 0 && el.textContent && (el.textContent.includes('🟩') || el.textContent.includes('⬛')) && el.textContent.includes('⚡')) {
+                if (el.children.length === 0 && el.textContent && (el.textContent.includes('🟩') || el.textContent.includes('⬛')) && el.textContent.includes('🪙')) {
                     el.innerHTML = `
                         <div class="claude-diff-line">
                             <div class="claude-model-row" title="${escapeHtml(d.providerName)}: ${escapeHtml(d.modelName)}">
@@ -567,20 +559,21 @@ function startClaudeAutoClient(listeningPipePath) {
         };
     }
 
+    // Bộ sưu tập 12 HOẠT CẢNH ĐỘNG 256x256 TRÀN VIỀN 100% KHUNG VUÔNG (Hiển thị TO, SẮC NÉT trên cả Điện Thoại, Web và Máy Người Khác mà KHÔNG cần CSS!)
+    const OWN_REPO_GIF_BASE = 'https://raw.githubusercontent.com/HaydernCenterpoint/Claude-Desktop-Discord-Rich-Presence/main/assets/gifs';
     const CLAWD_SCENES = [
+        { name: 'Hardhat Builder 🔨', url: `${OWN_REPO_GIF_BASE}/clawd-builder-xl.gif` },
+        { name: 'Headphones Groove 🎧', url: `${OWN_REPO_GIF_BASE}/clawd-groove-xl.gif` },
+        { name: 'Fast Coding ⌨️', url: `${OWN_REPO_GIF_BASE}/clawd-coding-xl.gif` },
+        { name: 'Rocket Boost 🚀', url: `${OWN_REPO_GIF_BASE}/clawd-rocket-xl.gif` },
+        { name: 'Party Crown 👑', url: `${OWN_REPO_GIF_BASE}/clawd-party-xl.gif` },
+        { name: 'Juggling AI Orbs 🤹', url: `${OWN_REPO_GIF_BASE}/clawd-juggling-xl.gif` },
+        { name: 'Coffee Break ☕', url: `${OWN_REPO_GIF_BASE}/clawd-coffee-xl.gif` },
+        { name: 'Deep Thinking 💡', url: `${OWN_REPO_GIF_BASE}/clawd-thinking-xl.gif` },
         { name: 'Dancing Mariachi 🪇', url: 'https://raw.githubusercontent.com/afspies/ClawdMoji/main/emoji/mariachi/clawd_mariachi.gif' },
         { name: 'Surfing Waves 🏄', url: 'https://raw.githubusercontent.com/afspies/ClawdMoji/main/emoji/surf/clawd_surf.gif' },
         { name: 'On Fire Coding 🔥', url: 'https://raw.githubusercontent.com/afspies/ClawdMoji/main/emoji/fire/clawd_fire.gif' },
-        { name: 'Headphones Groove 🎧', url: 'https://raw.githubusercontent.com/rullerzhou-afk/clawd-on-desk/main/assets/gif/clawd-headphones-groove.gif' },
-        { name: 'Juggling Tasks 🤹', url: 'https://raw.githubusercontent.com/rullerzhou-afk/clawd-on-desk/main/assets/gif/clawd-juggling.gif' },
-        { name: 'London Rain 🌧️', url: 'https://raw.githubusercontent.com/afspies/ClawdMoji/main/emoji/rain/clawd_rain.gif' },
-        { name: 'Building Blocks 🧱', url: 'https://raw.githubusercontent.com/rullerzhou-afk/clawd-on-desk/main/assets/gif/clawd-building.gif' },
-        { name: 'Fast Typing ⌨️', url: 'https://raw.githubusercontent.com/rullerzhou-afk/clawd-on-desk/main/assets/gif/clawd-typing.gif' },
-        { name: 'Rock Guitar 🎸', url: 'https://raw.githubusercontent.com/xixicc186/clawd-emotes-skill/main/clawd-emotes/gallery/clawd-guitar.gif' },
-        { name: 'Gaming Time 🎮', url: 'https://raw.githubusercontent.com/xixicc186/clawd-emotes-skill/main/clawd-emotes/gallery/clawd-gaming.gif' },
-        { name: 'Coffee Break ☕', url: 'https://raw.githubusercontent.com/xixicc186/clawd-emotes-skill/main/clawd-emotes/gallery/clawd-coffee.gif' },
-        { name: 'Deep Thinking 💡', url: 'https://raw.githubusercontent.com/rullerzhou-afk/clawd-on-desk/main/assets/gif/clawd-thinking.gif' },
-        { name: 'Happy Bounce 🦀', url: 'https://raw.githubusercontent.com/rullerzhou-afk/clawd-on-desk/main/assets/gif/clawd-idle.gif' }
+        { name: 'London Rain 🌧️', url: 'https://raw.githubusercontent.com/afspies/ClawdMoji/main/emoji/rain/clawd_rain.gif' }
     ];
 
     const MODEL_DISPLAY_MAP = {
@@ -730,8 +723,8 @@ function startClaudeAutoClient(listeningPipePath) {
         if (firstSentence && firstSentence.length >= 8) {
             s = firstSentence;
         }
-        if (s.length > 46) {
-            s = s.slice(0, 44).trim() + '...';
+        if (s.length > 42) {
+            s = s.slice(0, 40).trim() + '...';
         }
         return s.length >= 3 ? s : null;
     }
@@ -1382,8 +1375,14 @@ function startClaudeAutoClient(listeningPipePath) {
 
         injectCustomStylesAndColorizeDiff();
 
+        // TỐI ƯU HÓA HIỂN THỊ NATIVE 3 DÒNG TRÊN ĐIỆN THOẠI, TRÌNH DUYỆT WEB VÀ MÁY BẠN BÈ:
+        // - Dòng 1 (details): [Cowork] Working • Plugin Discord Rich Presence
+        // - Dòng 2 (state):   🪙 70.0M/3.7B • +20,150 -4 🟩🟩🟩🟩⬛  (Ngắn gọn ~32 ký tự để không bị cắt mất thanh 5 ô xanh trên màn hình hẹp của điện thoại!)
+        // - Dòng 3 (large_text - Discord tự động hiển thị thành dòng chữ thứ 3 trên Mobile/Web):
+        //   ✦ Gemini 4 Argon • >_ ••• Running a command...
         const details = `[${live.mode || 'Cowork'}] ${live.status || 'Working'} • ${live.activityName || 'Agentic Coding'}`.slice(0, 128);
-        const state = `⚡ ${shortModel} • 🪙 ${sessTokStr}/${totalTokStr} • ${addedStr} ${removedStr} ${diffBar.unicodeBar}`.slice(0, 128);
+        const state = `🪙 ${sessTokStr}/${totalTokStr} • ${addedStr} ${removedStr} ${diffBar.unicodeBar}`.slice(0, 128);
+        const nativeLine3 = `✦ ${shortModel} • >_ ${displayThinking}`.slice(0, 128);
 
         const sceneIndex = Math.floor(Date.now() / 15000) % CLAWD_SCENES.length;
         const currentScene = CLAWD_SCENES[sceneIndex];
@@ -1395,10 +1394,20 @@ function startClaudeAutoClient(listeningPipePath) {
             timestamps: cfg.showTimestamp !== false ? { start: sessionStart } : undefined,
             assets: {
                 large_image: currentScene.url,
-                large_text: `${currentScene.name} • Tokens: ${sessTokStr} (Total: ${totalTokStr})`.slice(0, 128),
+                large_text: nativeLine3,
                 small_image: statusBadge.smallKey,
                 small_text: statusBadge.smallText.slice(0, 128)
             },
+            buttons: [
+                {
+                    label: `✦ ${shortModel}`.slice(0, 32),
+                    url: 'https://github.com/HaydernCenterpoint/Claude-Desktop-Discord-Rich-Presence'
+                },
+                {
+                    label: `🪙 ${sessTokStr} • Total: ${totalTokStr}`.slice(0, 32),
+                    url: 'https://claude.ai'
+                }
+            ],
             instance: false
         };
 
@@ -1409,7 +1418,7 @@ function startClaudeAutoClient(listeningPipePath) {
         };
         try {
             clientSocket.write(encode(1, frame));
-            writeLog(`Sent SET_ACTIVITY: ${details} | ${state}`);
+            writeLog(`Sent SET_ACTIVITY: ${details} | ${state} | L3=${nativeLine3}`);
         } catch (e) {
             writeLog(`Write error: ${e.message}`);
         }
@@ -1490,7 +1499,7 @@ function startClaudeAutoClient(listeningPipePath) {
         }, 4000);
     }, 2000);
 }
-// --- End Auto Claude-3p Multi-Scene Clawd + Inline SVG Provider Logo + Terminal Box + Session/Lifetime Tokens + GitHub Diff Bar ---
+// --- End Auto Claude-3p Native 3-Line Mobile/Web Optimized + Full-Bleed 256x256 XL Clawd GIFs + Desktop Rich UI ---
 
 function recastNetServer(server) {
     const emitter = createSafeEmitter();
