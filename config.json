@@ -1,0 +1,22 @@
+{
+  "clientId": "1472915568930848829",
+  "mode": "Code",
+  "activityName": "Agentic Coding",
+  "status": "Working",
+  "model": "Gemini 4 Argon (google-antigravity)",
+  "showTimestamp": true,
+  "resetTimestampOnUpdate": false,
+  "autoWatchClaudeDesktop": true,
+  "onlyShowWhenClaudeRunning": true,
+  "assets": {
+    "largeImageKey": "https://raw.githubusercontent.com/rullerzhou-afk/clawd-on-desk/main/assets/gif/clawd-headphones-groove.gif",
+    "largeImageText": "Model: {model}",
+    "smallImageKey": "",
+    "smallImageText": "Mode: {mode}"
+  },
+  "buttons": [],
+  "displayTemplate": {
+    "details": "[{mode}] {status} • {activityName}",
+    "state": "⚡ {model}"
+  }
+}

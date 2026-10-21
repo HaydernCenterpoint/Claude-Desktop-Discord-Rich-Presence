@@ -1,0 +1,7 @@
+node_modules/
+*.log
+rpc-debug.log
+claude3p-structure.txt
+*.bak
+.DS_Store
+Thumbs.db
